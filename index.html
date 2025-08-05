@@ -11,16 +11,16 @@
     <meta name="author" content="성격 유형 테스트">
     <meta name="robots" content="index, follow">
     <meta name="language" content="Korean">
-    <link rel="canonical" href="https://your-domain.com/personality_test.html">
+    <link rel="canonical" href="https://jubilee86.github.io/personality-test/">
     
     <!-- Open Graph 태그 (Facebook, 카카오톡 등) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="테토남/테토녀/에겐남/에겐녀 테스트 | MBTI 기반 성격 유형 테스트">
     <meta property="og:description" content="MBTI 기반 성격 유형 테스트로 당신이 테토남, 테토녀, 에겐남, 에겐녀 중 어떤 유형인지 알아보세요. 20개 질문으로 간단하게 확인하는 무료 성격 테스트입니다.">
-    <meta property="og:url" content="https://your-domain.com/personality_test.html">
+    <meta property="og:url" content="https://jubilee86.github.io/personality-test/">
     <meta property="og:site_name" content="성격 유형 테스트">
     <meta property="og:locale" content="ko_KR">
-    <meta property="og:image" content="https://your-domain.com/images/personality-test-thumbnail.jpg">
+    <meta property="og:image" content="https://jubilee86.github.io/personality-test/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="테토남/테토녀/에겐남/에겐녀 성격 유형 테스트 미리보기">
@@ -29,7 +29,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="테토남/테토녀/에겐남/에겐녀 테스트 | MBTI 기반 성격 유형 테스트">
     <meta name="twitter:description" content="MBTI 기반 성격 유형 테스트로 당신이 테토남, 테토녀, 에겐남, 에겐녀 중 어떤 유형인지 알아보세요. 20개 질문으로 간단하게 확인하는 무료 성격 테스트입니다.">
-    <meta name="twitter:image" content="https://your-domain.com/images/personality-test-thumbnail.jpg">
+    <meta name="twitter:image" content="https://jubilee86.github.io/personality-test/og-image.jpg">
     <meta name="twitter:image:alt" content="테토남/테토녀/에겐남/에겐녀 성격 유형 테스트 미리보기">
     
     <!-- Threads 최적화 (Meta/Instagram 계열) -->
@@ -40,7 +40,7 @@
     <!-- Instagram 공유 최적화 -->
     <meta property="instagram:title" content="테토남/테토녀/에겐남/에겐녀 테스트">
     <meta property="instagram:description" content="나는 어떤 성격 유형일까? 🤔 MBTI 기반 재미있는 성격 테스트! #성격테스트 #MBTI #테토남 #테토녀 #에겐남 #에겐녀">
-    <meta property="instagram:image" content="https://your-domain.com/images/personality-test-instagram.jpg">
+    <meta property="instagram:image" content="https://jubilee86.github.io/personality-test/og-image.jpg">
     
     <!-- 추가 소셜미디어 최적화 -->
     <meta name="theme-color" content="#667eea">
@@ -394,6 +394,205 @@
             color: white;
             border-color: #667eea;
             transform: scale(1.05);
+        }
+
+        /* 모바일 반응형 디자인 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                border-radius: 15px;
+                max-width: 100%;
+            }
+
+            .title {
+                font-size: 2em;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .question {
+                font-size: 1.1em;
+                margin-bottom: 15px;
+                line-height: 1.4;
+            }
+
+            .option {
+                padding: 15px;
+                font-size: 1em;
+                border-radius: 10px;
+            }
+
+            .progress-bar {
+                height: 6px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 1em;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .result-area h2 {
+                font-size: 1.8em;
+            }
+
+            .result-area h3 {
+                font-size: 1.2em;
+            }
+
+            .percentage-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .percentage-item {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .title {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+            }
+
+            .question {
+                font-size: 1em;
+            }
+
+            .option {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* iPhone X/11/12/13/14 최적화 */
+        @media (max-width: 414px) and (max-height: 896px) {
+            body {
+                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+                padding-top: max(env(safe-area-inset-top), 10px);
+                padding-bottom: max(env(safe-area-inset-bottom), 10px);
+            }
+
+            .container {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Galaxy S/Note 시리즈 최적화 */
+        @media (max-width: 412px) and (max-height: 915px) {
+            .option {
+                min-height: 44px; /* 터치 최소 크기 */
+            }
+
+            .btn {
+                min-height: 44px;
+            }
+        }
+
+        /* 가로 모드 최적화 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .title {
+                font-size: 1.5em;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .question {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .option {
+                padding: 10px;
+            }
+
+            .options {
+                gap: 8px;
+            }
+        }
+
+        /* 고해상도 디스플레이 최적화 */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .title {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* 다크모드 지원 */
+        @media (prefers-color-scheme: dark) {
+            .container {
+                background: rgba(30, 30, 30, 0.95);
+                color: #ffffff;
+            }
+
+            .question {
+                color: #ffffff;
+            }
+
+            .option {
+                background: rgba(60, 60, 60, 0.8);
+                border-color: rgba(100, 100, 100, 0.5);
+                color: #ffffff;
+            }
+
+            .option:hover {
+                background: rgba(80, 80, 80, 0.8);
+            }
+        }
+
+        /* PWA 스타일 최적화 */
+        @media (display-mode: standalone) {
+            body {
+                user-select: none;
+                -webkit-user-select: none;
+                -webkit-touch-callout: none;
+            }
+
+            .container {
+                border-radius: 0;
+                min-height: 100vh;
+            }
         }
     </style>
 </head>

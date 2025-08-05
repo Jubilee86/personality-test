@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# 검색엔진에게 사이트맵 위치 알려주기
+Sitemap: https://jubilee86.github.io/personality-test/sitemap.xml
+
+# 광고 로봇 크롤링 허용
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+User-agent: DaumBot
+Allow: /
+
+# 소셜미디어 크롤러 허용
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: KakaoTalkBot
+Allow: /
+
+# 성능 최적화 - 크롤링 빈도 조절
+Crawl-delay: 1
