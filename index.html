@@ -562,23 +562,124 @@
 
         /* 다크모드 지원 */
         @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            }
+
             .container {
-                background: rgba(30, 30, 30, 0.95);
-                color: #ffffff;
+                background: rgba(20, 20, 30, 0.95);
+                color: #f0f0f0;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .title {
+                background: linear-gradient(45deg, #8b9ef7, #a78bfa);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .subtitle {
+                color: #b0b0b0;
             }
 
             .question {
-                color: #ffffff;
+                color: #f0f0f0;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             }
 
             .option {
-                background: rgba(60, 60, 60, 0.8);
-                border-color: rgba(100, 100, 100, 0.5);
-                color: #ffffff;
+                background: rgba(40, 40, 50, 0.9);
+                border: 2px solid rgba(120, 120, 140, 0.3);
+                color: #e0e0e0;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             }
 
             .option:hover {
-                background: rgba(80, 80, 80, 0.8);
+                background: rgba(60, 60, 70, 0.9);
+                border-color: rgba(140, 140, 160, 0.5);
+                color: #f0f0f0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .option.selected {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: #ffffff;
+                border-color: #667eea;
+            }
+
+            .option.selecting {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: #ffffff;
+                border-color: #667eea;
+            }
+
+            .btn {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: #ffffff;
+                border: none;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            }
+
+            .btn:hover {
+                background: linear-gradient(45deg, #5a6fd8, #6c42a0);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .btn:disabled {
+                background: rgba(80, 80, 90, 0.5);
+                color: rgba(200, 200, 200, 0.5);
+            }
+
+            .progress-bar {
+                background: rgba(60, 60, 70, 0.8);
+            }
+
+            .progress-fill {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+            }
+
+            .result-area h2 {
+                color: #f0f0f0;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            .result-area h3 {
+                color: #d0d0d0;
+            }
+
+            .result-area p {
+                color: #e0e0e0;
+                line-height: 1.7;
+            }
+
+            .percentage-item {
+                background: rgba(40, 40, 50, 0.8);
+                border: 1px solid rgba(120, 120, 140, 0.2);
+                color: #e0e0e0;
+            }
+
+            .percentage-label {
+                color: #b0b0b0;
+            }
+
+            .percentage-value {
+                color: #f0f0f0;
+                font-weight: bold;
+            }
+
+            .share-buttons {
+                background: rgba(30, 30, 40, 0.8);
+            }
+
+            .share-btn {
+                background: rgba(50, 50, 60, 0.9);
+                color: #e0e0e0;
+                border: 1px solid rgba(120, 120, 140, 0.3);
+            }
+
+            .share-btn:hover {
+                background: rgba(70, 70, 80, 0.9);
+                color: #f0f0f0;
             }
         }
 
