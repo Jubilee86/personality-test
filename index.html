@@ -372,6 +372,15 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+        .kakao-btn {
+            background: linear-gradient(45deg, #FEE500, #FFEB3B);
+            color: #3C1E1E;
+            border: 2px solid #FEE500;
+        }
+        .kakao-btn:hover {
+            background: linear-gradient(45deg, #FFD600, #FFC107);
+            border-color: #FFD600;
+        }
 
         .threads-btn {
             background: linear-gradient(45deg, #000000, #333333);
@@ -412,7 +421,7 @@
             }
             
             .question-text {
-                color: #fff;
+                color: #f0f0f0 !important;
             }
             
             .result-title {
@@ -979,42 +988,17 @@
             }
         });
 
-        // 카카오톡 공유 기능
+        // 카카오톡 공유 기능 (텍스트 복사 방식)
         function shareToKakao() {
             if (!finalResult) return;
             
-            try {
-                Kakao.Share.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: `🔍 ${finalResult.name} 결과가 나왔어요!`,
-                        description: `${finalResult.description}\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`,
-                        imageUrl: 'https://your-domain.com/images/personality-test-thumbnail.jpg', // 실제 이미지 URL로 교체 필요
-                        link: {
-                            mobileWebUrl: window.location.href,
-                            webUrl: window.location.href
-                        }
-                    },
-                    buttons: [
-                        {
-                            title: '테스트하러 가기',
-                            link: {
-                                mobileWebUrl: window.location.href,
-                                webUrl: window.location.href
-                            }
-                        }
-                    ]
-                });
-            } catch (error) {
-                // 카카오 SDK 로드 실패시 대안
-                const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description}\n\n나도 테스트해보세요! #성격테스트 #MBTI\n\n${window.location.href}`;
-                
-                navigator.clipboard.writeText(shareText).then(() => {
-                    alert('카카오톡 공유 텍스트가 복사되었습니다! 카카오톡에서 붙여넣기 해주세요.');
-                }).catch(() => {
-                    prompt('아래 텍스트를 복사해서 카카오톡에 공유하세요:', shareText);
-                });
-            }
+            const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description}\n\n나도 테스트해보세요! #성격테스트 #MBTI\n\n${window.location.href}`;
+            
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert('카카오톡 공유 텍스트가 복사되었습니다!\n카카오톡에서 붙여넣기 해주세요.');
+            }).catch(() => {
+                prompt('아래 텍스트를 복사해서 카카오톡에 공유하세요:', shareText);
+            });
         }
 
         function restartTest() {
