@@ -863,16 +863,16 @@
                 typeCount[answer]++;
             });
             
-            const totalQuestions = questions.length;
+            // 각 MBTI 차원별로 올바른 퍼센테이지 계산
             const percentages = {
-                E: Math.round((typeCount.E / totalQuestions) * 100),
-                I: Math.round((typeCount.I / totalQuestions) * 100),
-                S: Math.round((typeCount.S / totalQuestions) * 100),
-                N: Math.round((typeCount.N / totalQuestions) * 100),
-                T: Math.round((typeCount.T / totalQuestions) * 100),
-                F: Math.round((typeCount.F / totalQuestions) * 100),
-                J: Math.round((typeCount.J / totalQuestions) * 100),
-                P: Math.round((typeCount.P / totalQuestions) * 100)
+                E: Math.round((typeCount.E / (typeCount.E + typeCount.I)) * 100),
+                I: Math.round((typeCount.I / (typeCount.E + typeCount.I)) * 100),
+                S: Math.round((typeCount.S / (typeCount.S + typeCount.N)) * 100),
+                N: Math.round((typeCount.N / (typeCount.S + typeCount.N)) * 100),
+                T: Math.round((typeCount.T / (typeCount.T + typeCount.F)) * 100),
+                F: Math.round((typeCount.F / (typeCount.T + typeCount.F)) * 100),
+                J: Math.round((typeCount.J / (typeCount.J + typeCount.P)) * 100),
+                P: Math.round((typeCount.P / (typeCount.J + typeCount.P)) * 100)
             };
             
             const personalityType = 
