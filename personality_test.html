@@ -395,7 +395,64 @@
             border-color: #667eea;
             transform: scale(1.05);
         }
+
+        /* 다크모드 스타일 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #2c3e50, #4a6741);
+            }
+            
+            .container {
+                background: rgba(40, 40, 40, 0.95);
+                border: 1px solid #555;
+            }
+            
+            .subtitle {
+                color: #ccc;
+            }
+            
+            .question-text {
+                color: #fff;
+            }
+            
+            .result-title {
+                color: #fff;
+            }
+            
+            .result-description {
+                color: #f0f0f0 !important;
+            }
+            
+            .percentage-label {
+                color: #ddd;
+            }
+            
+            .share-title {
+                color: #fff;
+            }
+            
+            .option {
+                background: rgba(60, 60, 60, 0.8);
+                color: #fff;
+                border: 2px solid #555;
+            }
+            
+            .option:hover {
+                background: rgba(80, 80, 80, 0.9);
+                border-color: #777;
+            }
+            
+            .option.selected {
+                background: rgba(102, 126, 234, 0.3);
+                border-color: #667eea;
+            }
+        }
     </style>
+    
+    <!-- 카카오 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" 
+            integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" 
+            crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
@@ -440,6 +497,10 @@
                 <div class="share-section">
                     <h3 class="share-title">결과를 공유해보세요! 📱</h3>
                     <div class="share-buttons">
+                        <button class="share-btn kakao-btn" onclick="shareToKakao()">
+                            <span class="share-icon">💬</span>
+                            카카오톡
+                        </button>
                         <button class="share-btn threads-btn" onclick="shareToThreads()">
                             <span class="share-icon">🧵</span>
                             Threads
@@ -447,10 +508,6 @@
                         <button class="share-btn instagram-btn" onclick="shareToInstagram()">
                             <span class="share-icon">📷</span>
                             Instagram
-                        </button>
-                        <button class="share-btn twitter-btn" onclick="shareToTwitter()">
-                            <span class="share-icon">🐦</span>
-                            Twitter
                         </button>
                     </div>
                 </div>
@@ -915,6 +972,51 @@
             displayQuestion();
         }
 
+        // 카카오 SDK 초기화
+        window.addEventListener('DOMContentLoaded', function() {
+            if (typeof Kakao !== 'undefined' && Kakao.isInitialized() === false) {
+                Kakao.init('YOUR_KAKAO_APP_KEY'); // 실제 앱 키로 교체 필요
+            }
+        });
+
+        // 카카오톡 공유 기능
+        function shareToKakao() {
+            if (!finalResult) return;
+            
+            try {
+                Kakao.Share.sendDefault({
+                    objectType: 'feed',
+                    content: {
+                        title: `🔍 ${finalResult.name} 결과가 나왔어요!`,
+                        description: `${finalResult.description.substring(0, 100)}...\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`,
+                        imageUrl: 'https://your-domain.com/images/personality-test-thumbnail.jpg', // 실제 이미지 URL로 교체 필요
+                        link: {
+                            mobileWebUrl: window.location.href,
+                            webUrl: window.location.href
+                        }
+                    },
+                    buttons: [
+                        {
+                            title: '테스트하러 가기',
+                            link: {
+                                mobileWebUrl: window.location.href,
+                                webUrl: window.location.href
+                            }
+                        }
+                    ]
+                });
+            } catch (error) {
+                // 카카오 SDK 로드 실패시 대안
+                const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description.substring(0, 100)}...\n\n나도 테스트해보세요! #성격테스트 #MBTI\n\n${window.location.href}`;
+                
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('카카오톡 공유 텍스트가 복사되었습니다! 카카오톡에서 붙여넣기 해주세요.');
+                }).catch(() => {
+                    prompt('아래 텍스트를 복사해서 카카오톡에 공유하세요:', shareText);
+                });
+            }
+        }
+
         function restartTest() {
             currentQuestion = 0;
             answers = [];
@@ -937,22 +1039,15 @@
         function shareToThreads() {
             if (!finalResult) return;
             
-            const shareText = `🔍 성격 유형 테스트 결과: ${finalResult.name}!\n\n${finalResult.description.substring(0, 100)}...\n\n#성격테스트 #MBTI #${finalResult.name} #테스트`;
+            const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description.substring(0, 100)}...\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`;
             const shareUrl = window.location.href;
             
-            // Threads는 웹 공유 API 사용 또는 텍스트 복사
-            if (navigator.share) {
-                navigator.share({
-                    title: '성격 유형 테스트 결과',
-                    text: shareText,
-                    url: shareUrl
-                });
-            } else {
-                // 텍스트 복사
-                navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).then(() => {
-                    alert('Threads 공유 텍스트가 복사되었습니다! Threads 앱에서 붙여넣기 해주세요.');
-                });
-            }
+            // 텍스트 복사 방식으로 간소화
+            navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`).then(() => {
+                alert('Threads 공유 텍스트가 복사되었습니다!\nThreads 앱에서 붙여넣기 해주세요.');
+            }).catch(() => {
+                prompt('아래 텍스트를 복사해서 Threads에 공유하세요:', `${shareText}\n\n${shareUrl}`);
+            });
         }
 
         function shareToInstagram() {
@@ -961,27 +1056,14 @@
             const shareText = `나는 ${finalResult.name}! 🤔\n\n${finalResult.description.substring(0, 80)}...\n\n#성격테스트 #MBTI #${finalResult.name} #테토남 #테토녀 #에겐남 #에겐녀`;
             const shareUrl = window.location.href;
             
-            // Instagram은 직접 링크가 어려우므로 텍스트 복사
+            // Instagram 텍스트 복사
             navigator.clipboard.writeText(`${shareText}\n\n테스트 링크: ${shareUrl}`).then(() => {
-                alert('Instagram 공유 텍스트가 복사되었습니다! Instagram 스토리나 피드에서 붙여넣기 해주세요.');
+                alert('Instagram 공유 텍스트가 복사되었습니다!\nInstagram 스토리나 피드에서 붙여넣기 해주세요.');
             }).catch(() => {
-                // 클립보드 API가 지원되지 않는 경우
                 prompt('아래 텍스트를 복사해서 Instagram에 공유하세요:', `${shareText}\n\n테스트 링크: ${shareUrl}`);
             });
         }
 
-        function shareToTwitter() {
-            if (!finalResult) return;
-            
-            const shareText = `🔍 성격 유형 테스트 결과: ${finalResult.name}!\n\n${finalResult.description.substring(0, 80)}...\n\n#성격테스트 #MBTI #${finalResult.name}`;
-            const shareUrl = window.location.href;
-            
-            // Twitter 웹 인텐트 URL 생성
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-            
-            // 새 창에서 Twitter 공유 페이지 열기
-            window.open(twitterUrl, '_blank', 'width=550,height=420');
-        }
     </script>
 </body>
 </html>
