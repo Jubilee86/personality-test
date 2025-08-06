@@ -318,6 +318,9 @@
             margin-bottom: 8px;
             text-align: center;
         }
+        .analysis-title {
+            color: #333;
+        }
 
         .button-container {
             display: flex;
@@ -451,6 +454,10 @@
             
             .comparison-left, .comparison-right {
                 color: #f0f0f0 !important;
+            }
+            
+            .analysis-title {
+                color: #fff !important;
             }
             
             .comparison-bar {
@@ -944,7 +951,7 @@
             // 퍼센트 결과 표시
             const percentageContainer = document.getElementById('percentage-results');
             percentageContainer.innerHTML = `
-                <h3 style="margin-bottom: 20px; color: #333; text-align: center;">📊 성격 유형별 비율 분석</h3>
+                <h3 class="analysis-title" style="margin-bottom: 20px; text-align: center;">📊 성격 유형별 비율 분석</h3>
                 
                 <div class="percentage-title">외향형 vs 내향형</div>
                 <div class="comparison-bar">
