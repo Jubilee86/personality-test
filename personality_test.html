@@ -988,7 +988,7 @@
                     objectType: 'feed',
                     content: {
                         title: `🔍 ${finalResult.name} 결과가 나왔어요!`,
-                        description: `${finalResult.description.substring(0, 100)}...\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`,
+                        description: `${finalResult.description}\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`,
                         imageUrl: 'https://your-domain.com/images/personality-test-thumbnail.jpg', // 실제 이미지 URL로 교체 필요
                         link: {
                             mobileWebUrl: window.location.href,
@@ -1007,7 +1007,7 @@
                 });
             } catch (error) {
                 // 카카오 SDK 로드 실패시 대안
-                const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description.substring(0, 100)}...\n\n나도 테스트해보세요! #성격테스트 #MBTI\n\n${window.location.href}`;
+                const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description}\n\n나도 테스트해보세요! #성격테스트 #MBTI\n\n${window.location.href}`;
                 
                 navigator.clipboard.writeText(shareText).then(() => {
                     alert('카카오톡 공유 텍스트가 복사되었습니다! 카카오톡에서 붙여넣기 해주세요.');
@@ -1039,7 +1039,7 @@
         function shareToThreads() {
             if (!finalResult) return;
             
-            const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description.substring(0, 100)}...\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`;
+            const shareText = `🔍 ${finalResult.name} 결과가 나왔어요!\n\n${finalResult.description}\n\n나도 테스트해보세요! #성격테스트 #MBTI #${finalResult.name}`;
             const shareUrl = window.location.href;
             
             // 텍스트 복사 방식으로 간소화
@@ -1053,7 +1053,7 @@
         function shareToInstagram() {
             if (!finalResult) return;
             
-            const shareText = `나는 ${finalResult.name}! 🤔\n\n${finalResult.description.substring(0, 80)}...\n\n#성격테스트 #MBTI #${finalResult.name} #테토남 #테토녀 #에겐남 #에겐녀`;
+            const shareText = `나는 ${finalResult.name}! 🤔\n\n${finalResult.description}\n\n#성격테스트 #MBTI #${finalResult.name} #테토남 #테토녀 #에겐남 #에겐녀`;
             const shareUrl = window.location.href;
             
             // Instagram 텍스트 복사
