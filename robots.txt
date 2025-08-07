@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # 검색엔진에게 사이트맵 위치 알려주기
-Sitemap: https://jubilee86.github.io/sitemap.xml
+Sitemap: https://tetoegen.vercel.app/sitemap.xml
 
 # 광고 로봇 크롤링 허용
 User-agent: Googlebot

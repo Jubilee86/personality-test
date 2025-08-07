@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://jubilee86.github.io/</loc>
+        <loc>https://tetoegen.vercel.app/</loc>
         <lastmod>2025-08-06T00:00:00+09:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
