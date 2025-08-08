@@ -5,7 +5,8 @@
       "Bash(cp:*)",
       "Bash(git add:*)",
       "Bash(rm:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }
