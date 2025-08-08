@@ -426,3 +426,116 @@ function restartTest() {
 function goHome() {
     window.location.href = 'index.html';
 }
+
+// 성별 선택 기능 추가
+let selectedGender = '';
+let finalResult = null;
+let shuffledQuestions = [...questions];
+let autoProgressTimeout;
+
+function selectGender(gender, element) {
+    document.querySelectorAll('#gender-selection .option').forEach(opt => opt.classList.remove('selected'));
+    element.classList.add('selected');
+    selectedGender = gender;
+    document.getElementById('start-btn').disabled = false;
+}
+
+function startTest() {
+    shuffleQuestions(); // 질문 순서를 랜덤화
+    document.getElementById('gender-selection').style.display = 'none';
+    document.getElementById('test-area').style.display = 'block';
+    displayQuestion();
+}
+
+function shuffleQuestions() {
+    shuffledQuestions = [...questions];
+    for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+    }
+}
+
+function displayQuestion() {
+    const questionData = shuffledQuestions[currentQuestion];
+    document.getElementById('question-number').textContent = `질문 ${currentQuestion + 1}/${questions.length}`;
+    document.getElementById('question-text').textContent = questionData.question;
+    
+    const optionsContainer = document.getElementById('options');
+    optionsContainer.innerHTML = '';
+    
+    questionData.options.forEach((option, index) => {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'option';
+        optionElement.textContent = option.text;
+        optionElement.onclick = () => selectOption(index, optionElement);
+        optionsContainer.appendChild(optionElement);
+    });
+    
+    updateProgress();
+    updateButtonVisibility();
+}
+
+function selectOption(index, element) {
+    // 기존 타이머 취소
+    if (autoProgressTimeout) {
+        clearTimeout(autoProgressTimeout);
+    }
+    
+    // 모든 옵션에서 선택 상태 제거
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected', 'selecting');
+    });
+    
+    // 선택된 옵션에 선택 효과 추가
+    element.classList.add('selected');
+    
+    // 답변 저장
+    answers[currentQuestion] = shuffledQuestions[currentQuestion].options[index].type;
+    
+    // 즉시 다음 질문으로 진행
+    setTimeout(() => {
+        nextQuestion();
+    }, 200); // 매우 짧은 딜레이로 선택 효과만 보여주기
+}
+
+function updateButtonVisibility() {
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    // 첫 번째 질문이 아니면 이전 버튼 표시
+    if (prevBtn) prevBtn.style.display = currentQuestion > 0 ? 'inline-block' : 'none';
+}
+
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        // 자동 진행 타이머 취소
+        if (autoProgressTimeout) {
+            clearTimeout(autoProgressTimeout);
+        }
+        
+        currentQuestion--;
+        displayQuestion();
+        
+        // 이전 답변이 있다면 해당 옵션을 선택된 상태로 표시
+        if (answers[currentQuestion]) {
+            const questionData = shuffledQuestions[currentQuestion];
+            const selectedType = answers[currentQuestion];
+            const selectedIndex = questionData.options.findIndex(option => option.type === selectedType);
+            
+            if (selectedIndex !== -1) {
+                const options = document.querySelectorAll('.option');
+                options[selectedIndex].classList.add('selected');
+            }
+        }
+    }
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    
+    if (currentQuestion < questions.length) {
+        displayQuestion();
+    } else {
+        showResult();
+    }
+}
