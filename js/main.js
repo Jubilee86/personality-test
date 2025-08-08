@@ -250,8 +250,8 @@ function showResult() {
     
     if (result) {
         // 결과 표시
-        document.getElementById('test-container').style.display = 'none';
-        document.getElementById('result-container').style.display = 'block';
+        document.getElementById('test-area').style.display = 'none';
+        document.getElementById('result-area').style.display = 'block';
         
         document.getElementById('result-type').textContent = result.name;
         document.getElementById('result-description').textContent = result.description;
@@ -417,10 +417,19 @@ function fallbackCopyTextToClipboard(text) {
 function restartTest() {
     currentQuestion = 0;
     answers = [];
-    document.getElementById('test-container').style.display = 'block';
-    document.getElementById('result-container').style.display = 'none';
-    showQuestion();
-    updateProgress();
+    selectedGender = '';
+    finalResult = null;
+    shuffledQuestions = [...questions];
+    
+    // 자동 진행 타이머 취소
+    if (autoProgressTimeout) {
+        clearTimeout(autoProgressTimeout);
+    }
+    
+    document.getElementById('result-area').style.display = 'none';
+    document.getElementById('gender-selection').style.display = 'block';
+    document.getElementById('start-btn').disabled = true;
+    document.querySelectorAll('#gender-selection .option').forEach(opt => opt.classList.remove('selected'));
 }
 
 function goHome() {
