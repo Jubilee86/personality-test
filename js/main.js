@@ -242,8 +242,8 @@ function showResult() {
         (types['T'] > types['F'] ? 'T' : 'F') +
         (types['J'] > types['P'] ? 'J' : 'P');
     
-    // 성별 입력 받기
-    const gender = prompt("성별을 입력해주세요 (남/여):") === "남" ? "male" : "female";
+    // 이미 선택된 성별 사용
+    const gender = selectedGender === "남자" ? "male" : "female";
     
     const personality = personalities[mbti];
     const result = personality ? personality[gender] : null;
